@@ -1,7 +1,6 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
-import pip
-from pkg_resources import parse_version
+from pkg_resources import parse_version, working_set
 
 
 class Conflict(object):
@@ -205,7 +204,7 @@ class Checker(object):
         """
         Returns a dictionary of project_name => dict of projects that requires it with lists of requirements
         """
-        distributions = pip.get_installed_distributions()
+        distributions = working_set
         dist_requirements = {}
 
         # Compute the dist requirements and versions
@@ -227,7 +226,7 @@ class Checker(object):
         """
         Returns a dict of project_name => version installed
         """
-        distributions = pip.get_installed_distributions()
+        distributions = working_set
         dist_versions = {}
 
         # Build the installed versions dict
